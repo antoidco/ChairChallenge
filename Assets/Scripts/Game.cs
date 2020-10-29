@@ -16,7 +16,7 @@ namespace com.Antoid.ChairChallenge {
             PrepareScene(gameData.chairCount, gameData.unitCount);
 
             _sitOnChairSystem = new SitOnChairSystem(Configuration.ChairRadius, Configuration.UnitVelocity,
-                Configuration.ChangeChairProbability);
+                Configuration.ChangeChairProbability, Configuration);
         }
 
         private void Update() {

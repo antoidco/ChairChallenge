@@ -15,3 +15,6 @@ MonoBehaviour:
   ChangeChairProbability: 0.45
   ChairRadius: 1.5
   UnitVelocity: 1
+  RedText: {fileID: 2100000, guid: b2f6f4a6edfa7764eae716d8d59b0270, type: 2}
+  GreenText: {fileID: 2100000, guid: d8c51b909910f98459cf7c0723b9b120, type: 2}
+  BlueText: {fileID: 2100000, guid: 6be30c740547b0a48852b9ea6a7cb763, type: 2}

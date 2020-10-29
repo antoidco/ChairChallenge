@@ -106,3 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a521eaa149e48e44ab6652a861d4a962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  greenArrow: {fileID: 2100000, guid: 2694b33102b88cf43bc696b12a2045dc, type: 2}
+  redArrow: {fileID: 2100000, guid: cc85aae3b5197b64c98be1e1ea352735, type: 2}
+  blueArrow: {fileID: 2100000, guid: 6be30c740547b0a48852b9ea6a7cb763, type: 2}

@@ -39,7 +39,6 @@ namespace Com.Antoid.ChairChallenge {
         private void MaybeChooseAnotherChair() {
             if (Random.Range(0, 1f) > _changeChairProbability) {
                 var freeChairs = _chairSystem.GetFreeChairs();
-                Debug.Log(freeChairs.Count);
                 if (freeChairs.Count > 0) {
                     if (_sittingChair != null) {
                         GoalChair.Busy = false;

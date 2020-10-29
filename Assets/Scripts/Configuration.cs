@@ -6,5 +6,9 @@ namespace Com.Antoid.ChairChallenge {
         public float ChangeChairProbability = 0.45f;
         public float ChairRadius = 1.5f;
         public float UnitVelocity = 1f;
+
+        public Material RedText;
+        public Material GreenText;
+        public Material BlueText;
     }
 }
