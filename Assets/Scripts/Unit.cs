@@ -67,7 +67,7 @@ namespace Com.Antoid.ChairChallenge {
             var currentPosition = View.transform.position.X0Z();
             var goalChairPosition = GoalChair.View.transform.position.X0Z();
 
-            bool _stopMove = false;
+            bool stopMove = false;
             
             if ((currentPosition - goalChairPosition).magnitude < GoalChair.Radius) {
                 if (!GoalChair.Busy) {
@@ -75,15 +75,15 @@ namespace Com.Antoid.ChairChallenge {
                     _sittingChair = GoalChair;
                 }
                 else {
-                    _stopMove = (_sittingChair != GoalChair);
+                    stopMove = (_sittingChair != GoalChair);
                 }
             }
             // if need to move
             if (GoalChair != null && !_stopMove) {
                 var goalVector = (goalChairPosition - currentPosition);
-                float _clamp = GoalChair.Radius / 100f;
+                float clamp = GoalChair.Radius / 100f;
                 var delta = goalVector.normalized * (_velocity * deltaTime);
-                delta = goalVector.magnitude > _clamp ? delta : Vector3.zero;
+                delta = goalVector.magnitude > clamp ? delta : Vector3.zero;
                 View.transform.position += delta;
             }
         }
