@@ -1,5 +1,4 @@
 ﻿using Com.Antoid.ChairChallenge;
-using DefaultNamespace;
 using UnityEngine;
 
 namespace com.Antoid.ChairChallenge {
@@ -8,7 +7,7 @@ namespace com.Antoid.ChairChallenge {
         public GameObject unitPrefab;
 
         private SitOnChairSystem _sitOnChairSystem;
-
+        
         private void Start() {
             var gameData = FindObjectOfType<GameData>();
             if (gameData == null) Debug.Log("No GameData in scene");
@@ -19,7 +18,13 @@ namespace com.Antoid.ChairChallenge {
         }
 
         private void Update() {
-            _sitOnChairSystem.Update();
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                if (!_sitOnChairSystem.Active)
+                    _sitOnChairSystem.Active = true;
+                else
+                    _sitOnChairSystem.OneFrameTrigger = true;
+            }
+            _sitOnChairSystem.Update(Time.deltaTime);
         }
 
         private void PrepareScene(int chairs, int units) {
