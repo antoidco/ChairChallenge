@@ -1,4 +1,5 @@
 ﻿using Com.Antoid.ChairChallenge;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace com.Antoid.ChairChallenge {
@@ -6,14 +7,20 @@ namespace com.Antoid.ChairChallenge {
         public GameObject chairPrefab;
         public GameObject unitPrefab;
 
+        private SitOnChairSystem _sitOnChairSystem;
+
         private void Start() {
             var gameData = FindObjectOfType<GameData>();
             if (gameData == null) Debug.Log("No GameData in scene");
 
             PrepareScene(gameData.chairCount, gameData.unitCount);
+            
+            _sitOnChairSystem = new SitOnChairSystem();
         }
 
-        void Update() { }
+        private void Update() {
+            _sitOnChairSystem.Update();
+        }
 
         private void PrepareScene(int chairs, int units) {
             CreateObjectsInCircle(chairPrefab, chairs, 3);
