@@ -37,7 +37,7 @@ namespace Com.Antoid.ChairChallenge {
         /// Unit can chagne goal chair with probabilty of ChangeChairProbability
         /// </summary>
         private void MaybeChooseAnotherChair() {
-            if (Random.Range(0, 1f) > _changeChairProbability) {
+            if (Random.Range(0, 1f) < _changeChairProbability) {
                 var freeChairs = _chairSystem.GetFreeChairs();
                 if (freeChairs.Count > 0) {
                     if (_sittingChair != null) {
