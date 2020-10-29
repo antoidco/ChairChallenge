@@ -7,11 +7,15 @@ namespace Com.Antoid.ChairChallenge {
         public Chair GoalChair { get; set; }
         private SitOnChairSystem _chairSystem;
         private Chair _sittingChair;
+        private float _changeChairProbability;
+        private float _velocity;
 
-        public Unit(GameObject unityRef, SitOnChairSystem chairSystem) {
+        public Unit(GameObject unityRef, float velocity, float changeChairProbability, SitOnChairSystem chairSystem) {
             View = unityRef;
             _chairSystem = chairSystem;
             _sittingChair = null;
+            _changeChairProbability = changeChairProbability;
+            _velocity = velocity;
             GoalChair = null;
         }
 
@@ -33,7 +37,7 @@ namespace Com.Antoid.ChairChallenge {
         /// Unit can chagne goal chair with probabilty of ChangeChairProbability
         /// </summary>
         private void MaybeChooseAnotherChair() {
-            if (Random.Range(0, 1f) > GameData.ChangeChairProbability) {
+            if (Random.Range(0, 1f) > _changeChairProbability) {
                 var freeChairs = _chairSystem.GetFreeChairs();
                 Debug.Log(freeChairs.Count);
                 if (freeChairs.Count > 0) {
@@ -66,7 +70,7 @@ namespace Com.Antoid.ChairChallenge {
 
             bool _stopMove = false;
             
-            if ((currentPosition - goalChairPosition).magnitude < GameData.ChairRadius) {
+            if ((currentPosition - goalChairPosition).magnitude < GoalChair.Radius) {
                 if (!GoalChair.Busy) {
                     GoalChair.Busy = true;
                     _sittingChair = GoalChair;
@@ -78,8 +82,8 @@ namespace Com.Antoid.ChairChallenge {
             // if need to move
             if (GoalChair != null && !_stopMove) {
                 var goalVector = (goalChairPosition - currentPosition);
-                float _clamp = GameData.ChairRadius / 100f;
-                var delta = goalVector.normalized * (GameData.UnitVelocity * deltaTime);
+                float _clamp = GoalChair.Radius / 100f;
+                var delta = goalVector.normalized * (_velocity * deltaTime);
                 delta = goalVector.magnitude > _clamp ? delta : Vector3.zero;
                 View.transform.position += delta;
             }

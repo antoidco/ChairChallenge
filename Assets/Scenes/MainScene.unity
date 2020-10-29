@@ -234,6 +234,7 @@ MonoBehaviour:
     type: 3}
   unitPrefab: {fileID: 1776539892878024172, guid: 5857b4a588d53654dab959222fdf41a4,
     type: 3}
+  Configuration: {fileID: 11400000, guid: ea92c9876164799478cfdc8de283c2fc, type: 2}
 --- !u!1 &880833839
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,19 +2,21 @@
 using UnityEngine;
 
 namespace com.Antoid.ChairChallenge {
-    public class GameStartup : MonoBehaviour {
+    public class Game : MonoBehaviour {
         public GameObject chairPrefab;
         public GameObject unitPrefab;
+        public Configuration Configuration;
 
         private SitOnChairSystem _sitOnChairSystem;
-        
+
         private void Start() {
             var gameData = FindObjectOfType<GameData>();
             if (gameData == null) Debug.Log("No GameData in scene");
 
             PrepareScene(gameData.chairCount, gameData.unitCount);
-            
-            _sitOnChairSystem = new SitOnChairSystem();
+
+            _sitOnChairSystem = new SitOnChairSystem(Configuration.ChairRadius, Configuration.UnitVelocity,
+                Configuration.ChangeChairProbability);
         }
 
         private void Update() {
@@ -24,6 +26,7 @@ namespace com.Antoid.ChairChallenge {
                 else
                     _sitOnChairSystem.OneFrameTrigger = true;
             }
+
             _sitOnChairSystem.Update(Time.deltaTime);
         }
 
@@ -34,7 +37,7 @@ namespace com.Antoid.ChairChallenge {
 
         private void CreateObjectsInCircle(GameObject toCreate, int count, float radius) {
             for (int i = 0; i < count; ++i) {
-                var angle = i * 2 * Mathf.PI / count ;
+                var angle = i * 2 * Mathf.PI / count;
                 var relativePosition = new Vector3(radius * Mathf.Sin(angle), 0, radius * Mathf.Cos(angle));
                 Instantiate(toCreate, relativePosition, Quaternion.identity);
             }

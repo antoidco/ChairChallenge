@@ -9,18 +9,18 @@ namespace Com.Antoid.ChairChallenge {
         public bool Active { get; set; }
         public bool OneFrameTrigger { get; set; } // todo: event
 
-        public SitOnChairSystem() {
+        public SitOnChairSystem(float chairRadius, float unitVelocity, float changeChairProbability) {
             Active = false;
             OneFrameTrigger = false;
             var chairObjects = GameObject.FindObjectsOfType<ChairComponent>();
             var unitObjects = GameObject.FindObjectsOfType<UnitComponent>();
 
             foreach (var chairObject in chairObjects) {
-                _chairs.Add(new Chair(chairObject.gameObject));
+                _chairs.Add(new Chair(chairObject.gameObject, chairRadius));
             }
 
             foreach (var unitObject in unitObjects) {
-                _units.Add(new Unit(unitObject.gameObject, this));
+                _units.Add(new Unit(unitObject.gameObject, unitVelocity, changeChairProbability, this));
             }
         }
 
@@ -46,11 +46,12 @@ namespace Com.Antoid.ChairChallenge {
                     bool skip = false;
                     foreach (var unit in _units) {
                         if ((unit.View.transform.position.X0Z() - chair.View.transform.position.X0Z()).magnitude <
-                            GameData.ChairRadius) {
+                            chair.Radius) {
                             skip = true;
                             break;
                         }
                     }
+
                     if (skip) continue;
                     _freeChairsCache.Add(chair);
                 }
